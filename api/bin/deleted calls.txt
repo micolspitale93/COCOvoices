@@ -1,0 +1,193 @@
+        /*case (preg_match('/get_.*/', $METHOD["request"]) ? true : false):
+            checkRights(4);
+            checkFields(["id"]);
+            $table = str_replace("get_","",$METHOD["request"]);
+            $query="SELECT * FROM ".$table." WHERE id=?";
+            $stmt = $mysqli->prepare($query) or print_warning(__LINE__,"902","error preparing query");
+            $stmt->bind_param("s", $METHOD["id"]);
+            api_select(["password","email"]);
+            break;*/
+            
+            
+                        
+            var_dump($a_bind_params);
+            
+            $a_params = array();
+
+            $param_type = '';
+            $n = count($a_param_type);
+            for($i = 0; $i < $n; $i++) {
+              $param_type .= $a_param_type[$i];
+            }
+            echo $param_type;
+            $a_params[] = & $param_type;  /* with call_user_func_array, array params must be passed by reference */
+
+            for($i = 0; $i < $n; $i++) {
+              /* with call_user_func_array, array params must be passed by reference */
+              $a_params[] = & $a_bind_params[$i];
+            }
+            var_dump($a_params);
+            /* use call_user_func_array, as $stmt->bind_param('s', $param); does not accept params array */
+            echo call_user_func_array(array($stmt, 'bind_param'), $a_params);
+
+            /* Execute statement */
+            $stmt->execute();
+        
+            die("ooooo");
+            
+            
+            
+             /*checkFields(["session"]);        
+        $mysqli_logs = new mysqli($servername, $username, $password, $dbname_main_logs);
+        if ($mysqli_logs->connect_error) print_warning(__LINE__,"901","logs");
+        if (!isJson($METHOD["session"])) print_warning(__LINE__,"202","invalid session json passed to newSession");
+        // prepare and bind
+        $stmt = $mysqli_logs->prepare("INSERT INTO AllSessions(idTherapeuticCenter, idActivity, idChild, idTherapist, idParent, notes, rating, fieldList, dateStart, dateEnd, outcome) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+        $s=json_decode($METHOD["session"],true);
+        if (!isJson(json_encode($s["fieldList"]))) print_warning(__LINE__,"203");
+        
+        $stmt->bind_param("ssssssissss", $s["idTherapeuticCenter"], $s["idActivity"], $s["idChild"], $s["idTherapist"], $s["idParent"], $s["notes"], $s["rating"], $mysqli_logs->real_escape_string(json_encode($s["fieldList"])), $s["dateStart"], $s["dateEnd"], $s["outcome"]);
+        $stmt->execute() or print_warning(__LINE__,"903","error executing query - logs - new session");
+        
+        $session_id=$stmt->insert_id;
+        
+        $query = "CREATE TABLE session_".$session_id." ( ID INT AUTO_INCREMENT PRIMARY KEY,";
+        
+        foreach ($s["fieldList"] as $key => $value){
+           $query.=$key." ".$value.",";
+        }     
+        $query=rtrim($query, ",");
+        $query.=")";
+            
+        $stmt = $mysqli_logs->prepare($query);
+        
+        $stmt->execute() or print_warning(__LINE__,"903","error executing query - logs - new table");
+        break;*/
+        
+        /*case "getTherapeuticCenter":
+            checkFields(["id"]);
+            $query="SELECT * FROM TherapeuticCenter WHERE id=?";
+            $stmt = $mysqli->prepare($query) or print_warning(__LINE__,"902","error preparing query");
+            $stmt->bind_param("s", $METHOD["id"]);
+            api_select(["password"]);               
+            break;
+
+        case "getAllTherapeuticCenters":
+            $query="SELECT * FROM TherapeuticCenter";
+            $stmt = $mysqli->prepare($query) or print_warning(__LINE__,"902","error preparing query");
+            api_select(["password"]);       
+            break;   
+
+        case "getTherapist":
+            checkFields(["id"]);
+            $query="SELECT * FROM Therapist WHERE id=?";
+            $stmt = $mysqli->prepare($query) or print_warning(__LINE__,"902","error preparing query");
+            $stmt->bind_param("s", $METHOD["id"]);
+            api_select(["password"]);               
+            break;
+
+        case "getAllTherapistsFromTherapeuticCenter":
+            checkFields(["id"]);
+            $query="SELECT * FROM Therapist WHERE idTherapeuticCenter=?";
+            $stmt = $mysqli->prepare($query) or print_warning(__LINE__,"902","error preparing query");
+            $stmt->bind_param("s", $METHOD["id"]);
+            api_select(["password"]);       
+            break;   
+
+        case "getChild":
+            checkFields(["id"]);
+            $query="SELECT * FROM Child WHERE id=?";
+            $stmt = $mysqli->prepare($query) or print_warning(__LINE__,"902","error preparing query");
+            $stmt->bind_param("s", $METHOD["id"]);
+            api_select();               
+            break;
+
+        case "getAllChildrenFromTherapeuticCenter":
+            checkFields(["id"]);
+            $query="SELECT * FROM Child WHERE idTherapeuticCenter=?";
+            $stmt = $mysqli->prepare($query) or print_warning(__LINE__,"902","error preparing query");
+            $stmt->bind_param('s', $METHOD["id"]);
+            api_select(); 
+            break;
+
+        case "getAllChildrenFromParent":
+            checkFields(["id"]);
+            $query='SELECT C.* FROM Child C INNER JOIN Child_Parent CP on C.id = CP.idChild INNER JOIN Parent P on CP.idParent = P.id WHERE P.id = ?';
+            $stmt = $mysqli->prepare($query) or print_warning(__LINE__,"902","error preparing query");
+            $stmt->bind_param('s', $METHOD["id"]);
+            api_select(); 
+            break;
+
+        case "getAllChildrenFromTherapist":
+            checkFields(["id"]);
+            $query='SELECT C.* FROM Child C INNER JOIN Child_Therapist CT on C.id = CT.idChild INNER JOIN Therapist T on CT.idTherapist = T.id WHERE T.id = ?';
+            $stmt = $mysqli->prepare($query) or print_warning(__LINE__,"902","error preparing query");
+            $stmt->bind_param('s', $METHOD["id"]);
+            api_select(); 
+            break;
+
+        case "getAllParentsFromChild":
+            checkFields(["id"]);
+            $query='SELECT P.* FROM Parent P INNER JOIN Child_Parent CP on P.id = CP.idParent INNER JOIN Child C on CP.idParent = C.id WHERE C.id = ?';
+            $stmt = $mysqli->prepare($query) or print_warning(__LINE__,"902","error preparing query");
+            $stmt->bind_param('s', $METHOD["id"]);
+            api_select(); 
+            break;
+
+        case "getAllActivities":
+            $query='SELECT * FROM Activity';
+            $stmt = $mysqli->prepare($query) or print_warning(__LINE__,"902","error preparing query");
+            api_select(); 
+            break;
+
+        case "getActivity":
+            checkFields(["id"]);
+            $query='SELECT * FROM Activity WHERE id=?';
+            $stmt = $mysqli->prepare($query) or print_warning(__LINE__,"902","error preparing query");
+            $stmt->bind_param('s', $METHOD["id"]);
+            api_select(); 
+            break;
+
+        case "getActivitiesFromUser":
+            checkFields(["id"]);
+            $query='SELECT A.* FROM Activity A INNER JOIN Activity_TherapeuticCenter ATP on A.id = ATP.idActivity INNER JOIN TherapeuticCenter TC on ATP.idTherapeuticCenter = TC.id WHERE TC.id = ?';
+            $stmt = $mysqli->prepare($query) or print_warning(__LINE__,"902","error preparing query");
+            $stmt->bind_param('s', $METHOD["id"]);
+            api_select(); 
+            break;*/
+    
+    /*case "getAllSessions":
+        $mysqli_logs = new mysqli($servername, $username, $password, $dbname_main_logs);
+        if ($mysqli_logs->connect_error) print_warning(__LINE__,"901","logs");
+        $query='SELECT * FROM AllSessions';
+        $stmt = $mysqli_logs->prepare($query) or print_warning(__LINE__,"902","error preparing query - logs");
+        api_select(); 
+        break;*/
+    
+    /*case "newLogSession":
+        checkFields(["session"]);        
+        $mysqli_logs = new mysqli($servername, $username, $password, $dbname_main_logs);
+        if ($mysqli_logs->connect_error) print_warning(__LINE__,"901","logs");
+        if (!isJson($METHOD["session"])) print_warning(__LINE__,"202","invalid session json passed to newSession");
+        // prepare and bind
+        $stmt = $mysqli_logs->prepare("INSERT INTO AllSessions(idTherapeuticCenter, idActivity, idChild, idTherapist, idParent, notes, rating, fieldList, dateStart, dateEnd, outcome) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+        $s=json_decode($METHOD["session"],true);
+        if (!isJson(json_encode($s["fieldList"]))) print_warning(__LINE__,"203");
+        
+        $stmt->bind_param("ssssssissss", $s["idTherapeuticCenter"], $s["idActivity"], $s["idChild"], $s["idTherapist"], $s["idParent"], $s["notes"], $s["rating"], $mysqli_logs->real_escape_string(json_encode($s["fieldList"])), $s["dateStart"], $s["dateEnd"], $s["outcome"]);
+        $stmt->execute() or print_warning(__LINE__,"903","error executing query - logs - new session");
+        
+        $session_id=$stmt->insert_id;
+        
+        $query = "CREATE TABLE session_".$session_id." ( ID INT AUTO_INCREMENT PRIMARY KEY,";
+        
+        foreach ($s["fieldList"] as $key => $value){
+           $query.=$key." ".$value.",";
+        }     
+        $query=rtrim($query, ",");
+        $query.=")";
+            
+        $stmt = $mysqli_logs->prepare($query);
+        
+        $stmt->execute() or print_warning(__LINE__,"903","error executing query - logs - new table");
+        break;*/

@@ -1,0 +1,6 @@
+- l'utente e' solo di un tipo -> successivamente l'utente con una singola email potra' essere di piu? da decidere
+X request log dei developer in modo che li possa sempre tracciare
+- logo
+- libreria js e altre piattaforme
+- template
+- favicon 

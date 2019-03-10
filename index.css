@@ -1,0 +1,134 @@
+/*#videos-container{
+    display:none;
+}*/
+#alien{
+    display:none;
+}
+
+
+h1, h2, section {
+    border-bottom: none;
+}
+
+audio, video {
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+
+    -o-transition: all 1s ease;
+    -webkit-transition: all 1s ease;
+    transition: all 1s ease;
+    vertical-align: top;
+}
+
+input {
+    border: 1px solid #d9d9d9;
+    border-radius: 1px;
+    font-size: 1em;
+    margin: .2em;
+    width: 30%;
+    font-family: 'Product Sans'
+}
+
+.setup {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    font-size: 50%;
+    height: 35px;
+    margin-left: -9px;
+    margin-top: 8px;
+    position: absolute;
+}
+
+p {
+    padding: 1em;
+}
+
+li {
+
+    padding: .5em;
+}
+
+.highlight {
+    color: rgb(0, 8, 189);
+}
+
+@keyframes float {
+    0% {
+        /* box-shadow: 0 5px 0px 0px rgba(0, 0, 0, 0.6);*/
+        transform: translatey(0px);
+    }
+
+    50% {
+        /*box-shadow: 0 25px 0px 0px rgba(0, 0, 0, 0.2);*/
+        transform: translatey(-10px);
+    }
+
+    100% {
+        /* box-shadow: 0 5px 0px 0px rgba(0, 0, 0, 0.6);*/
+        transform: translatey(0px);
+    }
+}
+
+@keyframes faceMoving {
+    0% {
+
+        transform: translatey(0px);
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: translatey(-5px);
+        transform: rotate(5deg);
+    }
+
+    50% {
+        transform: translatey(-5px);
+        transform: rotate(0deg);
+    }
+
+    75% {
+        transform: translatey(0px);
+        transform: rotate(-5deg);
+    }
+
+    100% {
+        transform: translatey(0px);
+        transform: rotate(0deg);
+    }
+}
+
+svg {
+    /*animation: float 2s infinite;*/
+    margin: auto;
+    margin-top: 30px;
+    width: 50%;
+    height: 50%;
+
+}
+
+#Mouth {
+    animation: faceMoving 2s infinite;
+    transform-origin: 50% 50%;
+    position: absolute;
+    z-index:999;
+}
+
+#mouth_1{
+    transform-origin: 50% 50%;
+}
+
+#Face_lamb {
+    animation: faceMoving 2s infinite;
+    transform-origin: 50% 50%;
+}
+
+html,
+body {
+    font-family: 'Product Sans';
+    background-color: white;
+}
+
+#alien {
+    margin: auto;
+    text-align: center;
+}
