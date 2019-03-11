@@ -1,4 +1,3 @@
-var mic, ftt, freq, vol;
 $(document).ready(function () {
     window.face = $("#Face_lamb");
     window.mouth = $("#Mouth");
@@ -209,7 +208,8 @@ function sendMessage(freq, vol) {
 }
 
 function handleReceiveMessage(event) {
-    animation(freq, vol);
+    
+    animation(event.data.freq, event.data.vol);
     console.log("Ricevuto");
 }
 
@@ -217,7 +217,7 @@ function handleReceiveMessage(event) {
 
 function animation(freq, vol) {
     console.log(freq,vol);
-    window.mouse_chosen.attr("transform-origin", "50% 50%");
+    window.mouse_chodmessa.attr("transform-origin", "50% 50%");
     window.mouse_chosen.attr("transform", "scale(" + (1 + vol) + "," + (1 + vol) + ")");
     selectedMouth(freq);
 }
