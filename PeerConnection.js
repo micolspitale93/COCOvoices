@@ -3,7 +3,8 @@
 // Documentation - https://github.com/muaz-khan/WebRTC-Experiment/tree/master/websocket
 var sendChannel = {};
 sendChannel.readyState = "";
-var mic,ftt;
+var mic, ftt;
+
 (function () {
 
     window.PeerConnection = function (socketURL, userid) {
@@ -176,7 +177,7 @@ var mic,ftt;
             if (message.candidate && message.to == root.userid) {
                 self.onice(message);
             }
-            
+
             // if someone sent participation request
             if (message.participationRequest && message.to == root.userid) {
                 self.participantFound = true;
@@ -255,8 +256,6 @@ var mic,ftt;
             sendChannel.onopen = handleSendChannelStatusChange;
             sendChannel.onclose = handleSendChannelStatusChange;
             console.log(sendChannel);
-            setup();
-            draw();
 
             if (typeof peer.addTrack === 'function') {
                 if (config.MediaStream) {
@@ -399,6 +398,11 @@ var mic,ftt;
 })();
 
 
+if (sendChannel.readyState == "open") {
+    setup();
+    draw();
+}
+
 function setup() {
     mic = new p5.AudioIn();
     mic.getSources(function (deviceList) {
@@ -427,8 +431,8 @@ function handleSendChannelStatusChange(event) {
         var state = sendChannel.readyState;
         if (state === "open") {
             console.log("open");
-            
-            
+
+
         } else {
             console.log("not open");
         }
