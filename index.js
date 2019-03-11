@@ -208,7 +208,7 @@ function sendMessage(freq, vol) {
 }
 
 function handleReceiveMessage(event) {
-    console.log("Ricevuto:"+event);
+    console.log("Ricevuto:"+event.data);
     animation(event.data.freq, event.data.vol);
 }
 
