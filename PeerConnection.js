@@ -3,6 +3,7 @@
 // Documentation - https://github.com/muaz-khan/WebRTC-Experiment/tree/master/websocket
 var sendChannel = {};
 sendChannel.readyState = "";
+var mic,ftt;
 (function () {
 
     window.PeerConnection = function (socketURL, userid) {
@@ -409,11 +410,11 @@ function setup() {
 
 function draw() {
     var spectrum = fft.analyze();
-    vol = mic.getLevel();
+    var vol = mic.getLevel();
     for (i = 0; i < spectrum.length; i++) {
         var sp = spectrum[i];
     }
-    freq = fft.getEnergy(spectrum[0], spectrum[spectrum.length - 1]);
+    var freq = fft.getEnergy(spectrum[0], spectrum[spectrum.length - 1]);
     if (sendChannel.readyState == "open") {
         sendMessage(freq, vol);
     }
@@ -424,6 +425,8 @@ function handleSendChannelStatusChange(event) {
         var state = sendChannel.readyState;
         if (state === "open") {
             console.log("open");
+            setup();
+            draw();
         } else {
             console.log("not open");
         }
