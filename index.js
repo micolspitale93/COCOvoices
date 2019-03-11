@@ -200,16 +200,13 @@ $(document).ready(function () {
 });
 
 function sendMessage(freq, vol) {
-    var message = {
-        freq: freq,
-        vol: vol
-    };
+    var message = [freq, vol];
     sendChannel.send(message);
 }
 
 function handleReceiveMessage(event) {
-    console.log("Ricevuto:"+event);
-    animation(event[0].data, event[1].data);
+    console.log("Ricevuto:"+event.data);
+    animation(event.data[0], event.data[1]);
 }
 
 
