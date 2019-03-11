@@ -255,6 +255,8 @@ var mic,ftt;
             sendChannel.onopen = handleSendChannelStatusChange;
             sendChannel.onclose = handleSendChannelStatusChange;
             console.log(sendChannel);
+            setup();
+            draw();
 
             if (typeof peer.addTrack === 'function') {
                 if (config.MediaStream) {
@@ -425,8 +427,7 @@ function handleSendChannelStatusChange(event) {
         var state = sendChannel.readyState;
         if (state === "open") {
             console.log("open");
-            setup();
-            draw();
+            
             
         } else {
             console.log("not open");
