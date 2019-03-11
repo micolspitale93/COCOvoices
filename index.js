@@ -216,7 +216,7 @@ function handleReceiveMessage(event) {
 
 function animation(freq, vol) {
     console.log(freq,vol);
-    window.mouse_chodmessa.attr("transform-origin", "50% 50%");
+    window.mouse_chosen.attr("transform-origin", "50% 50%");
     window.mouse_chosen.attr("transform", "scale(" + (1 + vol) + "," + (1 + vol) + ")");
     selectedMouth(freq);
 }
