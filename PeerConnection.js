@@ -425,6 +425,8 @@ function handleSendChannelStatusChange(event) {
         var state = sendChannel.readyState;
         if (state === "open") {
             console.log("open");
+            setup();
+            draw();
             
         } else {
             console.log("not open");
