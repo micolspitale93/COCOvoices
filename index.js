@@ -12,7 +12,7 @@ $(document).ready(function () {
     window.mouth_4 = $("#Ee");
     window.mouth_8 = $("#Surprised");
     window.mouth_10 = $("#Smile");
-    
+
     window.mouse_chosen = window.mouth_1;
     window.mouth_2.hide();
     window.mouth_3.hide();
@@ -216,10 +216,10 @@ function handleReceiveMessage(event) {
 
 
 function animation(freq, vol) {
-    selectedMouth(freq);
+    console.log(freq,vol);
     window.mouse_chosen.attr("transform-origin", "50% 50%");
     window.mouse_chosen.attr("transform", "scale(" + (1 + vol) + "," + (1 + vol) + ")");
-    console.log("animation");
+    selectedMouth(freq);
 }
 
 function selectedMouth(freq) {
