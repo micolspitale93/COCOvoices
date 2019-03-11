@@ -114,6 +114,8 @@ $(document).ready(function () {
 
     document.querySelector('#start-broadcasting').onclick = function () {
         this.disabled = true;
+        setup();
+        draw();
         getUserMedia(function (stream) {
             peer.addStream(stream);
             peer.startBroadcasting();
@@ -205,14 +207,14 @@ function sendMessage(freq, vol) {
 }
 
 function handleReceiveMessage(event) {
-    console.log("Ricevuto:"+event.data);
+    console.log("Ricevuto:" + event.data);
     animation(event.data[0], event.data[1]);
 }
 
 
 
 function animation(freq, vol) {
-    console.log(freq,vol);
+    console.log(freq, vol);
     window.mouse_chosen.attr("transform-origin", "50% 50%");
     window.mouse_chosen.attr("transform", "scale(" + (1 + vol) + "," + (1 + vol) + ")");
     selectedMouth(freq);

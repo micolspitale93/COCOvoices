@@ -398,11 +398,6 @@ var mic, ftt;
 })();
 
 
-if (sendChannel.readyState == "open") {
-    setup();
-    draw();
-}
-
 function setup() {
     mic = new p5.AudioIn();
     mic.getSources(function (deviceList) {
