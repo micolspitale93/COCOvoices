@@ -197,32 +197,33 @@ $(document).ready(function () {
             else uniqueToken.innerHTML = uniqueToken.parentNode.parentNode.href = '#' + ("micol").toString(36).toUpperCase().replace(/\./g, '-');
         /*else uniqueToken.innerHTML = uniqueToken.parentNode.parentNode.href = '#' + (Math.random() * new Date().getTime()).toString(36).toUpperCase().replace(/\./g, '-');*/
     })();
-
-
 });
 
-function sendMessage(freq, vol) {
-    var message = [freq, vol];
+function sendMessage(fr, vo) {
+    var message = [];
+    message.push(fr);
+    message.push(vo);
     sendChannel.send(message);
 }
 
 function handleReceiveMessage(event) {
-    console.log("Ricevuto:" + event.data);
-    animation(event.data[0], event.data[1]);
+   // console.log("Ricevuto:" + event.data);
+    var res = event.data.split(",");
+    animation(res[0],res[1]);
 }
 
 
 
-function animation(freq, vol) {
-    console.log(freq, vol);
+function animation(f, v) {
+    console.log(f, v);
     window.mouse_chosen.attr("transform-origin", "50% 50%");
-    window.mouse_chosen.attr("transform", "scale(" + (1 + vol) + "," + (1 + vol) + ")");
-    selectedMouth(freq);
+    window.mouse_chosen.attr("transform", "scale(" + (1 + 1*v) + "," + (1 + 1*v) + ")");
+    selectedMouth(f);
 }
 
-function selectedMouth(freq) {
+function selectedMouth(f) {
     console.log("selected frequencies");
-    if (freq > -1 && freq < 26) {
+    if (f > -1 && f < 26) {
         window.mouse_chosen = window.mouth_1;
         window.mouth_1.show();
         window.mouth_2.hide();
@@ -234,7 +235,7 @@ function selectedMouth(freq) {
         window.mouth_8.hide();
         window.mouth_9.hide();
         window.mouth_10.hide();
-    } else if (freq > 25 && freq < 51) {
+    } else if (f > 25 && f < 51) {
         window.mouse_chosen = window.mouth_2;
         window.mouth_2.show();
         window.mouth_1.hide();
@@ -246,7 +247,7 @@ function selectedMouth(freq) {
         window.mouth_8.hide();
         window.mouth_9.hide();
         window.mouth_10.hide();
-    } else if (freq > 50 && freq < 76) {
+    } else if (f > 50 && f < 76) {
         window.mouth_2.hide();
         window.mouth_1.hide();
         window.mouth_3.show();
@@ -258,7 +259,7 @@ function selectedMouth(freq) {
         window.mouth_9.hide();
         window.mouth_10.hide();
         window.mouse_chosen = window.mouth_3;
-    } else if (freq > 75 && freq < 101) {
+    } else if (f > 75 && f < 101) {
         window.mouse_chosen = window.mouth_4;
         window.mouth_2.hide();
         window.mouth_1.hide();
@@ -270,7 +271,7 @@ function selectedMouth(freq) {
         window.mouth_8.hide();
         window.mouth_9.hide();
         window.mouth_10.hide();
-    } else if (freq > 100 && freq < 126) {
+    } else if (f > 100 && f < 126) {
         window.mouse_chosen = window.mouth_5;
         window.mouth_2.hide();
         window.mouth_1.hide();
@@ -282,7 +283,7 @@ function selectedMouth(freq) {
         window.mouth_8.hide();
         window.mouth_9.hide();
         window.mouth_10.hide();
-    } else if (freq > 125 && freq < 151) {
+    } else if (f > 125 && f < 151) {
         window.mouth_2.hide();
         window.mouth_1.hide();
         window.mouth_6.show();
@@ -294,7 +295,7 @@ function selectedMouth(freq) {
         window.mouth_9.hide();
         window.mouth_10.hide();
         window.mouse_chosen = window.mouth_6;
-    } else if (freq > 150 && freq < 176) {
+    } else if (f > 150 && f < 176) {
         window.mouse_chosen = window.mouth_7;
         window.mouth_2.hide();
         window.mouth_1.hide();
@@ -306,7 +307,7 @@ function selectedMouth(freq) {
         window.mouth_8.hide();
         window.mouth_9.hide();
         window.mouth_10.hide();
-    } else if (freq > 175 && freq < 201) {
+    } else if (f > 175 && f < 201) {
         window.mouse_chosen = window.mouth_8;
         window.mouth_2.hide();
         window.mouth_1.hide();
@@ -318,7 +319,7 @@ function selectedMouth(freq) {
         window.mouth_3.hide();
         window.mouth_9.hide();
         window.mouth_10.hide();
-    } else if (freq > 200 && freq < 226) {
+    } else if (f > 200 && f < 226) {
         window.mouse_chosen = window.mouth_9;
         window.mouth_2.hide();
         window.mouth_1.hide();
@@ -330,7 +331,7 @@ function selectedMouth(freq) {
         window.mouth_8.hide();
         window.mouth_3.hide();
         window.mouth_10.hide();
-    } else if (freq > 225 && freq < 256) {
+    } else if (f > 225 && f < 256) {
         window.mouse_chosen = window.mouth_10;
         window.mouth_2.hide();
         window.mouth_1.hide();

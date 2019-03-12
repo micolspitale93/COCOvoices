@@ -421,6 +421,8 @@ function draw() {
     }
 }
 
+
+
 function handleSendChannelStatusChange(event) {
     if (sendChannel) {
         var state = sendChannel.readyState;
