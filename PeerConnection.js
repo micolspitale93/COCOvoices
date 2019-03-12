@@ -423,7 +423,6 @@ function draw() {
    // console.log(spectrum[0], spectrum[spectrum.length - 1]);
    // var freq = fft.getEnergy(spectrum[0], spectrum[spectrum.length - 1]);
     if (sendChannel.readyState == "open") {
-        console.log("open");
         sendMessage(freq, vol);
     }
 }

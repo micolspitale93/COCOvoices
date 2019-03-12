@@ -200,17 +200,19 @@ $(document).ready(function () {
 });
 
 function sendMessage(fr, vo) {
-    console.log("message");
     var message = [];
     message.push(fr);
     message.push(vo);
-    sendChannel.send(message);
+    window.setInterval(function () {
+        sendChannel.send(message);
+    }, 1000);
+
 }
 
 function handleReceiveMessage(event) {
-   // console.log("Ricevuto:" + event.data);
+    // console.log("Ricevuto:" + event.data);
     var res = event.data.split(",");
-    animation(res[0],res[1]);
+    animation(res[0], res[1]);
 }
 
 
@@ -218,12 +220,11 @@ function handleReceiveMessage(event) {
 function animation(f, v) {
     console.log(f, v);
     window.mouse_chosen.attr("transform-origin", "50% 50%");
-    window.mouse_chosen.attr("transform", "scale(" + (1 + 1*v) + "," + (1 + 1*v) + ")");
+    window.mouse_chosen.attr("transform", "scale(" + (1 + 1 * v) + "," + (1 + 1 * v) + ")");
     selectedMouth(f);
 }
 
 function selectedMouth(f) {
-    console.log("selected frequencies");
     if (f > -1 && f < 26) {
         window.mouse_chosen = window.mouth_1;
         window.mouth_1.show();
