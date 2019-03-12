@@ -220,7 +220,7 @@ function handleReceiveMessage(event) {
 function animation(f, v) {
     console.log(f, v);
     window.mouse_chosen.attr("transform-origin", "50% 50%");
-    window.mouse_chosen.attr("transform", "scale(" + (1 + 1 * v) + "," + (1 + 1 * v) + ")");
+    window.mouse_chosen.attr("transform", "scale(" + (1 - 1 * v) + "," + (1 - 1 * v) + ")");
     selectedMouth(f);
 }
 
