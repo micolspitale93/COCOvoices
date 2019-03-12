@@ -200,6 +200,7 @@ $(document).ready(function () {
 });
 
 function sendMessage(fr, vo) {
+    console.log("message");
     var message = [];
     message.push(fr);
     message.push(vo);
