@@ -87,7 +87,7 @@ $(document).ready(function () {
     };
 
     peer.onStreamAdded = function (e) {
-        console.log(e);
+        //console.log(e);
         if (e.type == 'local') document.querySelector('#start-broadcasting').disabled = false;
         var video = e.mediaElement;
         video.setAttribute('width', 600);
@@ -218,7 +218,7 @@ function handleReceiveMessage(event) {
 
 
 function animation(f, v) {
-    console.log(f, v);
+    //console.log(f, v);
     window.mouse_chosen.attr("transform-origin", "50% 50%");
     window.mouse_chosen.attr("transform", "scale(" + (1 + 1 * v) + "," + (1 + 1 * v) + ")");
     selectedMouth(f);
