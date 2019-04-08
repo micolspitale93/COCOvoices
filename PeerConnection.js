@@ -423,10 +423,9 @@ function draw() {
     // console.log(spectrum[0], spectrum[spectrum.length - 1]);
     // var freq = fft.getEnergy(spectrum[0], spectrum[spectrum.length - 1]);
     if (sendChannel.readyState == "open") {
-        var interval = setInterval(function () {
+       
             sendMessage(freq, vol);
-            clearInterval(interval);
-        }, 2000);
+       
     }
 }
 

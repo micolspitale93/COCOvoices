@@ -114,8 +114,10 @@ $(document).ready(function () {
 
     document.querySelector('#start-broadcasting').onclick = function () {
         this.disabled = true;
-        setup();
-        draw();
+        var interval = setInterval(function () {
+            setup();
+            draw();
+        }, 2000);
         getUserMedia(function (stream) {
             peer.addStream(stream);
             peer.startBroadcasting();
