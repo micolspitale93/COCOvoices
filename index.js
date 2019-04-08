@@ -204,8 +204,9 @@ function sendMessage(fr, vo) {
     message.push(fr);
     message.push(vo);
     window.setInterval(function () {
+        console.log(message);
         sendChannel.send(message);
-    }, 1000);
+    }, 2000);
 
 }
 
