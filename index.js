@@ -203,7 +203,7 @@ function sendMessage(fr, vo) {
     var message = [];
     message.push(fr);
     message.push(vo);
-    window.setInterval(function () {
+    setInterval(function () {
         console.log(message);
         sendChannel.send(message);
     }, 2000);
