@@ -415,15 +415,17 @@ function draw() {
     var tot_sp = 0;
     for (i = 0; i < spectrum.length; i++) {
         var sp = spectrum[i];
-        tot_sp+=sp;
-        
+        tot_sp += sp;
+
     }
-    var freq = tot_sp/spectrum.length;
+    var freq = tot_sp / spectrum.length;
     //console.log(freq,vol)
-   // console.log(spectrum[0], spectrum[spectrum.length - 1]);
-   // var freq = fft.getEnergy(spectrum[0], spectrum[spectrum.length - 1]);
+    // console.log(spectrum[0], spectrum[spectrum.length - 1]);
+    // var freq = fft.getEnergy(spectrum[0], spectrum[spectrum.length - 1]);
     if (sendChannel.readyState == "open") {
-        sendMessage(freq, vol);
+        setInterval(function () {
+            sendMessage(freq, vol);
+        }, 2000);
     }
 }
 

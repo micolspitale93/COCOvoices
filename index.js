@@ -203,11 +203,8 @@ function sendMessage(fr, vo) {
     var message = [];
     message.push(fr);
     message.push(vo);
-    setInterval(function () {
-        console.log(message);
-        sendChannel.send(message);
-    }, 2000);
-
+    console.log(message);
+    sendChannel.send(message);
 }
 
 function handleReceiveMessage(event) {
