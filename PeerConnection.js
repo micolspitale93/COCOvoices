@@ -423,8 +423,9 @@ function draw() {
     // console.log(spectrum[0], spectrum[spectrum.length - 1]);
     // var freq = fft.getEnergy(spectrum[0], spectrum[spectrum.length - 1]);
     if (sendChannel.readyState == "open") {
-        setInterval(function () {
+        var interval = setInterval(function () {
             sendMessage(freq, vol);
+            clearInterval(interval);
         }, 2000);
     }
 }
@@ -436,7 +437,6 @@ function handleSendChannelStatusChange(event) {
         var state = sendChannel.readyState;
         if (state === "open") {
             console.log("open");
-
 
         } else {
             console.log("not open");
