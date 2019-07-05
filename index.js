@@ -78,7 +78,7 @@ $(document).ready(function () {
     button_send1.onclick = function () {
         var value_video = send_audio1.options[send_audio1.selectedIndex].value;
         console.log(value_video);
-         sendChannel.send(value_video);
+        sendChannel.send(value_video);
     };
 
     button_send2.onclick = function () {
@@ -181,10 +181,8 @@ $(document).ready(function () {
 
     document.querySelector('#start-broadcasting').onclick = function () {
         this.disabled = true;
-        var interval = setInterval(function () {
-            setup();
-            draw();
-        }, 2000);
+        setup();
+        draw();
         getUserMedia(function (stream) {
             peer.addStream(stream);
             peer.startBroadcasting();
