@@ -26,6 +26,73 @@ $(document).ready(function () {
 
     // Set event listeners for user interface widgets
 
+    var send_video = document.getElementById("send_recorded_video");
+    var send_audio1 = document.getElementById("send_recorded_audio1");
+    var send_audio2 = document.getElementById("send_recorded_audio2");
+    var send_audio3 = document.getElementById("send_recorded_audio3");
+    var recorded_video_story = ["story1", "story2", "story3"];
+    var recorded_audio1 = ["1_1", "1_2", "1_3", "1_4", "1_5", "1_6", "1_7", "1_8", "1_9", "1_10", "1_11", "1_12", "1_13", "1_14", "1_15", "1_16", "1_17", "1_18"];
+    var recorded_audio2 = ["2_1", "2_2", "2_3", "2_4", "2_5", "2_6", "2_7", "2_8", "2_9", "2_10", "2_11", "2_12", "2_13", "2_14", "2_15", "2_16", "2_17", "2_18"];
+    var recorded_audio3 = ["3_1", "3_2", "3_3", "3_4", "3_5", "3_6", "3_7", "3_8", "3_9", "3_10", "3_11", "3_12", "3_13", "3_14", "3_15", "3_16", "3_17", "3_18"];
+    var num_story = recorded_video_story.length;
+    var num_rec1 = recorded_audio1.length;
+    var num_rec2 = recorded_audio2.length;
+    var num_rec3 = recorded_audio3.length;
+
+    for (i = 0; i < num_story; i++) {
+        var opt = document.createElement("option");
+        opt.appendChild(document.createTextNode(recorded_video_story[i]))
+        opt.value = recorded_video_story[i];
+        send_video.appendChild(opt);
+    }
+
+    for (i = 0; i < num_rec1; i++) {
+        var opt = document.createElement("option");
+        opt.appendChild(document.createTextNode(recorded_audio1[i]))
+        opt.value = recorded_audio1[i];
+        send_audio1.appendChild(opt);
+    }
+    for (i = 0; i < num_rec2; i++) {
+        var opt = document.createElement("option");
+        opt.appendChild(document.createTextNode(recorded_audio2[i]))
+        opt.value = recorded_audio2[i];
+        send_audio2.appendChild(opt);
+    }
+    for (i = 0; i < num_rec3; i++) {
+        var opt = document.createElement("option");
+        opt.appendChild(document.createTextNode(recorded_audio3[i]))
+        opt.value = recorded_audio3[i];
+        send_audio3.appendChild(opt);
+    }
+
+    var button_send = document.getElementById("send_value");
+    var button_send1 = document.getElementById("send_value_rec1");
+    var button_send2 = document.getElementById("send_value_rec2");
+    var button_send3 = document.getElementById("send_value_rec3");
+    button_send.onclick = function () {
+        var value_video = send_video.options[send_video.selectedIndex].value;
+        console.log(value_video);
+        sendMessage(value_video);
+    };
+
+    button_send1.onclick = function () {
+        var value_video = send_audio1.options[send_audio1.selectedIndex].value;
+        console.log(value_video);
+        sendMessage(value_video);
+    };
+
+    button_send2.onclick = function () {
+        var value_video = send_audio2.options[send_audio2.selectedIndex].value;
+        console.log(value_video);
+        sendMessage(value_video);
+    };
+
+    button_send3.onclick = function () {
+        var value_video = send_audio3.options[send_audio3.selectedIndex].value;
+        console.log(value_video);
+        sendMessage(value_video);
+    };
+
     if (!location.hash.replace('#', '').length) {
         //location.href = location.href.split('#')[0] + '#' + (Math.random() * 100).toString().replace('.', '');
         location.href = location.href.split('#')[0] + '#' + ("micol").toString().replace('.', '')
@@ -211,9 +278,38 @@ function sendMessage(fr, vo) {
 
 function handleReceiveMessage(event) {
     // console.log("Ricevuto:" + event.data);
-    var res = event.data.split(",");
-    animation(res[0], res[1]);
+    if (event.data.indexOf(",") > -1) {
+        var res = event.data.split(",");
+        animation(res[0], res[1]);
+    } else {
+        var received_value = event.data;
+        showVideo(received_value);
+    }
 }
+
+
+function showVideo(received_value) {
+    var div_video = document.getElementById("videos-recorded");
+    var video = document.createElement('video');
+    video.src = "./videos/" + received_value + ".mp4";
+    video.controls = false;
+    div_video.appendChild(video);
+    video.load();
+
+    video.addEventListener('loadeddata', function () {
+
+        video.play();
+
+    }, false);
+
+    video.addEventListener("ended", test, false);
+
+    function test(e) {
+
+        div_video.removeChild(video);
+    }
+}
+
 
 
 
