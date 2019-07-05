@@ -72,25 +72,25 @@ $(document).ready(function () {
     button_send.onclick = function () {
         var value_video = send_video.options[send_video.selectedIndex].value;
         console.log(value_video);
-        sendMessage(value_video);
+        sendChannel.send(value_video);
     };
 
     button_send1.onclick = function () {
         var value_video = send_audio1.options[send_audio1.selectedIndex].value;
         console.log(value_video);
-        sendMessage(value_video);
+         sendChannel.send(value_video);
     };
 
     button_send2.onclick = function () {
         var value_video = send_audio2.options[send_audio2.selectedIndex].value;
         console.log(value_video);
-        sendMessage(value_video);
+        sendChannel.send(value_video);
     };
 
     button_send3.onclick = function () {
         var value_video = send_audio3.options[send_audio3.selectedIndex].value;
         console.log(value_video);
-        sendMessage(value_video);
+        sendChannel.send(value_video);
     };
 
     if (!location.hash.replace('#', '').length) {
